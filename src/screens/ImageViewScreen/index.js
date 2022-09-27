@@ -6,6 +6,7 @@ import {layoutPtToPx} from '../../utils/responsiveUI';
 import ImageViewing from 'react-native-image-viewing/dist/ImageViewing';
 import {useNavigation} from '@react-navigation/native';
 import colors from '../../constants/colors';
+import useBackButtonPress from '../../hooks/useBackButtonPress';
 
 function ImageViewScreen(props) {
   const localStyle = useStyleProcessor(styles, 'ImageViewScreen');
@@ -15,6 +16,7 @@ function ImageViewScreen(props) {
   mediaArray.map(image => {
     images.push({uri: image?.url});
   });
+  useBackButtonPress();
 
   return (
     <SafeAreaView>

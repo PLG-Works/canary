@@ -1,3 +1,4 @@
+import TwitterAPI from '../../api/helpers/TwitterAPI';
 import {Constants} from '../../constants/Constants';
 import Cache from '../../services/Cache';
 import {CacheKey} from '../../services/Cache/CacheStoreConstants';
@@ -52,4 +53,13 @@ export function showPromotion(cacheKey) {
     return true;
   }
   return false;
+}
+
+export function getTweetDataFromId(tweetId) {
+  return new Promise(resolve => {
+    TwitterAPI.getSingleTweet(tweetId).then(res => {
+      const tweetData = getTweetData(res?.data?.data, res);
+      return resolve(tweetData);
+    });
+  });
 }

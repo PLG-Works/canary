@@ -64,9 +64,8 @@ function TwitterTextView({
   const onPressMention = useCallback(
     (e, str) => {
       const strArray = str.split('@');
-      navigation.push(ScreenName.SearchResultScreen, {
-        query: `from:${strArray[1]}`,
-        sortOrder: Constants.SortOrder.Recency,
+      navigation.push(ScreenName.UserProfileScreen, {
+        userName: strArray[1],
       });
     },
     [navigation],

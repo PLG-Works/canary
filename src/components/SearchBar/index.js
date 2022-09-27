@@ -77,6 +77,7 @@ function SearchBar({
         onChangeText={updateQuery}
         onSubmitEditing={onSearchPress}
         returnKeyType="search"
+        autoFocus={true}
       />
 
       {query.length > 0 && (

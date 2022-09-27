@@ -32,7 +32,10 @@ class ThreadTweetListDataSource extends PaginatedListDataSource {
         referencedTweets.type === ReferencedTweetTypes.RepliedTo &&
         referencedTweets.id === this.tweetId
       ) {
-        this.viewData[tweet.id] = getTweetData(tweet, response);
+        this.viewData[tweet.id] = {
+          ...getTweetData(tweet, response),
+          replied_to: this.username,
+        };
 
         array.push(this.viewData[tweet.id]);
       }

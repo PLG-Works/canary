@@ -1,3 +1,4 @@
+import {getTweetDataFromId} from '../components/utils/ViewData';
 import {Constants} from '../constants/Constants';
 import ScreenName from '../constants/ScreenName';
 import {EventTypes, LocalEvent} from '../utils/LocalEvent';
@@ -16,10 +17,16 @@ export const handleDynamicUrl = url => {
   switch (pageName) {
     case Constants.PageName.Archive:
       NavigationService.navigate(ScreenName.ImportArchiveScreen, data);
-
       break;
+
     case Constants.PageName.List:
       NavigationService.navigate(ScreenName.ImportListScreen, data);
+      break;
+
+    case Constants.PageName.Thread:
+      getTweetDataFromId(data).then(tweetData => {
+        NavigationService.navigate(ScreenName.ThreadScreen, {tweetData});
+      });
       break;
   }
 };

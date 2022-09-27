@@ -11,11 +11,11 @@ import {getFormattedStat} from '../../../utils/TextUtils';
 import TwitterTextView from '../TwitterTextView';
 
 function UserCard(props) {
-  const {userData} = props;
+  const {style, cardStyle, userData, shouldDisablePress = true} = props;
   const localStyle = useStyleProcessor(styles, 'UserCard');
   return (
-    <View style={localStyle.container}>
-      <View style={localStyle.cardContainer}>
+    <View style={style || localStyle.container}>
+      <View style={cardStyle || localStyle.cardContainer}>
         <View>
           <Image
             source={{uri: userData?.profile_image_url}}
@@ -58,7 +58,7 @@ function UserCard(props) {
         <TwitterTextView
           style={localStyle.descriptionText}
           linkStyle={localStyle.descriptionLinkText}
-          isPressDisabled={true}>
+          isPressDisabled={shouldDisablePress}>
           {userData?.description}
         </TwitterTextView>
       </View>

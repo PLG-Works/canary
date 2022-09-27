@@ -21,4 +21,5 @@ export default {
   ImportListScreen: 'ImportListScreen',
   ImportArchiveScreen: 'ImportArchiveScreen',
   SettingScreen: 'SettingScreen',
+  UserProfileScreen: 'UserProfileScreen',
 };

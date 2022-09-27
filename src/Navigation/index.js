@@ -35,6 +35,7 @@ import ImportArchiveScreen from '../screens/ImportArchiveScreen';
 import TabletNavBar from './TabletNavBar';
 import {isTablet} from 'react-native-device-info';
 import SettingScreen from '../screens/SettingScreen';
+import UserProfileScreen from '../screens/UserProfileScreen';
 
 // TODO: Please correct he screen names.
 const Navigation = props => {
@@ -153,6 +154,17 @@ const Navigation = props => {
         <TimelineStack.Screen
           name={ScreenName.SettingScreen}
           component={SettingScreen}
+          options={{
+            gestureEnabled: true,
+            headerShown: false,
+            tabBarVisible: false,
+            detachPreviousScreen: true,
+            ...TransitionPresets.SlideFromRightIOS,
+          }}
+        />
+        <TimelineStack.Screen
+          name={ScreenName.UserProfileScreen}
+          component={UserProfileScreen}
           options={{
             gestureEnabled: true,
             headerShown: false,
@@ -432,6 +444,17 @@ const Navigation = props => {
             ...TransitionPresets.SlideFromRightIOS,
           }}
         />
+        <DiscoverStack.Screen
+          name={ScreenName.UserProfileScreen}
+          component={UserProfileScreen}
+          options={{
+            gestureEnabled: true,
+            headerShown: false,
+            tabBarVisible: false,
+            detachPreviousScreen: true,
+            ...TransitionPresets.SlideFromRightIOS,
+          }}
+        />
       </DiscoverStack.Navigator>
     );
   }
@@ -535,6 +558,17 @@ const Navigation = props => {
             ...TransitionPresets.SlideFromRightIOS,
           }}
         />
+        <ListStack.Screen
+          name={ScreenName.UserProfileScreen}
+          component={UserProfileScreen}
+          options={{
+            gestureEnabled: true,
+            headerShown: false,
+            tabBarVisible: false,
+            detachPreviousScreen: true,
+            ...TransitionPresets.SlideFromRightIOS,
+          }}
+        />
       </ListStack.Navigator>
     );
   }
@@ -624,6 +658,15 @@ const Navigation = props => {
         <CollectionStack.Screen
           name={ScreenName.ImportArchiveScreen}
           component={ImportArchiveScreen}
+          options={{
+            headerShown: false,
+            tabBarVisible: false,
+            detachPreviousScreen: true,
+          }}
+        />
+        <CollectionStack.Screen
+          name={ScreenName.UserProfileScreen}
+          component={UserProfileScreen}
           options={{
             headerShown: false,
             tabBarVisible: false,

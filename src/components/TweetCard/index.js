@@ -13,7 +13,7 @@ import {
   verifiedIcon,
 } from '../../assets/common';
 import {useStyleProcessor} from '../../hooks/useStyleProcessor';
-import colors from '../../constants/colors';
+import colors, {getColorWithOpacity} from '../../constants/colors';
 import useTweetCardData from './useTweetCardData';
 import ImageCard from '../ImageCard';
 import {getFormattedStat} from '../../utils/TextUtils';
@@ -55,8 +55,16 @@ function TweetCard(props) {
     fnOnLikePress,
   } = useTweetCardData(props);
   const localStyle = useStyleProcessor(styles, 'TweetCard');
-  const {user, text, id, public_metrics, media, entities, created_at} =
-    dataSource;
+  const {
+    user,
+    text,
+    id,
+    public_metrics,
+    media,
+    entities,
+    created_at,
+    replied_to = '',
+  } = dataSource;
 
   const displayDate = useMemo(() => getDisplayDate(created_at), [created_at]);
 
@@ -114,6 +122,19 @@ function TweetCard(props) {
             <Text style={localStyle.displayDateText}>{displayDate}</Text>
           </View>
         </View>
+        {replied_to ? (
+          <TouchableOpacity
+            testID={`${testID}_tweet_card_with_id_${id}_user_details`}
+            activeOpacity={0.75}
+            onPress={() => {
+              fnOnUserNamePress({userName: replied_to});
+            }}>
+            <Text style={localStyle.repliedToText}>
+              Replied to
+              <Text style={localStyle.mentionText}>{` @${replied_to}`}</Text>
+            </Text>
+          </TouchableOpacity>
+        ) : null}
         <View
           style={localStyle.tweetDetailContainer}
           pointerEvents={disablePointerEvents ? 'none' : 'auto'}>
@@ -269,6 +290,19 @@ const styles = {
     fontSize: fontPtToPx(12),
     lineHeight: layoutPtToPx(15),
     color: colors.Black,
+  },
+  repliedToText: {
+    fontFamily: fonts.InterRegular,
+    fontSize: fontPtToPx(12),
+    lineHeight: layoutPtToPx(15),
+    color: getColorWithOpacity(colors.OxfordBlue, 0.8),
+    paddingTop: layoutPtToPx(6),
+  },
+  mentionText: {
+    fontFamily: fonts.InterSemiBold,
+    fontSize: fontPtToPx(12),
+    lineHeight: layoutPtToPx(15),
+    color: colors.GoldenTainoi,
   },
   likeCommentStrip: {
     flexDirection: 'row',

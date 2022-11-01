@@ -20,7 +20,8 @@ class ListService {
 
   async addList(listName, userNameArray) {
     return new Promise((resolve, reject) => {
-      if (isEmpty(listName.trim())) {
+      const _listName = listName.trim();
+      if (isEmpty(_listName)) {
         return reject('Please enter a valid name');
       }
       const colorCombination = getRandomColorCombination();
@@ -30,7 +31,7 @@ class ListService {
           var listObj = {};
           listObj[id] = {
             id: id,
-            name: listName,
+            name: _listName,
             userNames: userNameArray || [],
             colorCombination,
           };
@@ -46,7 +47,7 @@ class ListService {
         } else {
           var _list = JSON.parse(list);
 
-          if (find(_list, {name: listName.trim()})) {
+          if (find(_list, {name: _listName})) {
             return reject('List name already exists.');
           }
 
@@ -55,7 +56,7 @@ class ListService {
           const newList = {};
           newList[newId] = {
             id: newId,
-            name: listName,
+            name: _listName,
             userNames: userNameArray || [],
             colorCombination,
           };
@@ -77,11 +78,12 @@ class ListService {
   async editList(list) {
     return new Promise((resolve, reject) => {
       const {id, name} = list;
-      if (find(this.lists, {name: name.trim()})) {
+      const listName = name.trim();
+      if (find(this.lists, {name: listName})) {
         return reject('List name already exists.');
       }
       const _list = this.lists[id];
-      _list.name = name;
+      _list.name = listName;
       this.lists[id] = _list;
       Store.set(StoreKeys.Lists, this.lists)
         .then(() => {

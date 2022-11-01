@@ -129,7 +129,7 @@ function useAddCollectionModalData() {
       });
       return;
     }
-    if (modalData?.name === collectionNameRef.current) {
+    if (modalData?.name === collectionNameRef.current.trim()) {
       closeModal?.();
       return;
     }

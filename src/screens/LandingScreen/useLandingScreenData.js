@@ -1,6 +1,6 @@
 import {useNavigation} from '@react-navigation/native';
 import {useCallback, useMemo, useRef, useState, useEffect} from 'react';
-import {Dimensions, Platform} from 'react-native';
+import {Dimensions} from 'react-native';
 import ScreenName from '../../constants/ScreenName';
 import {useOrientationState} from '../../hooks/useOrientation';
 import AsyncStoreHelper from '../../services/AsyncStoreHelper';
@@ -43,25 +43,14 @@ export default function useLandingScreenData({isNotOnboardingScreen}) {
   }, []);
 
   const onContinuePress = useCallback(() => {
-    if (activeIndexRef.current === carousalData.length - 1) {
-      if (isNotOnboardingScreen) {
-        navigation.goBack();
-        return;
-      } else {
-        navigation.navigate(ScreenName.PreferenceScreen);
-        return;
-      }
+    if (isNotOnboardingScreen) {
+      navigation.goBack();
+      return;
+    } else {
+      navigation.navigate(ScreenName.PreferenceScreen);
+      return;
     }
-    flatListRef.current?.scrollToIndex({
-      animated: true,
-      index: activeIndexRef.current + 1,
-    });
-
-    if (Platform.OS === 'android') {
-      activeIndexRef.current++;
-      setActiveIndex(activeIndexRef.current);
-    }
-  }, [carousalData.length, isNotOnboardingScreen, navigation]);
+  }, [isNotOnboardingScreen, navigation]);
 
   const onRestorePress = useCallback(() => {
     navigation.navigate(ScreenName.RestoreScreen, {

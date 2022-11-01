@@ -128,7 +128,7 @@ function useAddListModalData() {
       });
       return;
     }
-    if (modalData?.name === listNameRef.current) {
+    if (modalData?.name === listNameRef.current.trim()) {
       closeModal?.();
       return;
     }

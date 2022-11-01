@@ -11,6 +11,7 @@ import LottieView from 'lottie-react-native';
 import Header from '../../components/common/Header';
 import * as Animatable from 'react-native-animatable';
 import {useAppStateListener} from '../../hooks/useAppStateListener';
+import {rightArrowIcon} from '../../assets/common';
 
 function LandingScreen(props) {
   const localStyle = useStyleProcessor(style, 'LandingScreen');
@@ -83,32 +84,6 @@ function LandingScreen(props) {
     [aCarousalData, nActiveIndex],
   );
 
-  const buttonOptions = useMemo(() => {
-    const buttonData = {
-      text: activeIndexData?.buttonText,
-    };
-
-    if (activeIndexData?.buttonImage) {
-      buttonData.rightImage = activeIndexData.buttonImage;
-      buttonData.rightImageStyle = localStyle.continueButtonIcon;
-    }
-
-    if (isNotOnboardingScreen && nActiveIndex === aCarousalData.length - 1) {
-      delete buttonData.rightImage;
-      delete buttonData.rightImageStyle;
-      buttonData.text = 'Got it !';
-    }
-
-    return buttonData;
-  }, [
-    aCarousalData.length,
-    activeIndexData.buttonImage,
-    activeIndexData?.buttonText,
-    isNotOnboardingScreen,
-    localStyle.continueButtonIcon,
-    nActiveIndex,
-  ]);
-
   return (
     <Animatable.View style={localStyle.container} animation="slideInRight">
       {isNotOnboardingScreen ? (
@@ -150,7 +125,9 @@ function LandingScreen(props) {
             textStyle={localStyle.continueButtonText}
             onPress={fnOnContinuePress}
             underlayColor={colors.GoldenTainoi80}
-            {...buttonOptions}
+            rightImage={rightArrowIcon}
+            rightImageStyle={localStyle.continueButtonIcon}
+            text={isNotOnboardingScreen ? 'Got it !' : 'Get Started'}
           />
           {!isNotOnboardingScreen && nActiveIndex === 0 ? (
             <RoundedButton

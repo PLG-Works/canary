@@ -5,7 +5,7 @@ import {fontPtToPx, layoutPtToPx} from '../../utils/responsiveUI';
 import {Canary, SettingsIcon} from '../../assets/common';
 import useTimelineScreenData from './useTimelineScreenData';
 import Header from '../../components/common/Header';
-import colors from '../../constants/colors';
+import colors, {getColorWithOpacity} from '../../constants/colors';
 import TimelineList from '../../components/TimelineList';
 import fonts from '../../constants/fonts';
 import useTabListener from '../../hooks/useTabListener';
@@ -49,9 +49,14 @@ function TimelineScreen(props) {
                 testID="canary_title_home_screen"
                 activeOpacity={0.9}
                 onPress={scrollToTop}
-                style={localStyle.flexRow}>
-                <Image source={Canary} style={localStyle.iconStyle} />
-                <Text style={localStyle.appNameText}>Canary</Text>
+                style={localStyle.flex}>
+                <View style={localStyle.flexRow}>
+                  <Image source={Canary} style={localStyle.iconStyle} />
+                  <Text style={localStyle.appNameText}>Canary</Text>
+                </View>
+                <Text style={localStyle.headerDescriptionText}>
+                  Showing tweets from the last 7 days
+                </Text>
               </TouchableOpacity>
             }
           />
@@ -86,6 +91,9 @@ const styles = {
       },
     },
   },
+  flex: {
+    flex: 1,
+  },
   iconStyle: {
     height: layoutPtToPx(24),
     width: layoutPtToPx(24),
@@ -96,6 +104,15 @@ const styles = {
     fontSize: fontPtToPx(16),
     lineHeight: layoutPtToPx(20),
     marginLeft: layoutPtToPx(4),
+  },
+  headerDescriptionText: {
+    color: getColorWithOpacity(colors.BlackPearl, 0.7),
+    fontFamily: fonts.InterRegular,
+    fontSize: fontPtToPx(10),
+    lineHeight: layoutPtToPx(12),
+    marginLeft: layoutPtToPx(10),
+    marginTop: layoutPtToPx(8),
+    textAlign: 'center',
   },
   flexRow: {
     flex: 1,

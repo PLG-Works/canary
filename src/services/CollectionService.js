@@ -24,7 +24,8 @@ class CollectionService {
 
   async addCollection(collectionName, tweetIdArray) {
     return new Promise((resolve, reject) => {
-      if (isEmpty(collectionName.trim())) {
+      const _collectionName = collectionName.trim();
+      if (isEmpty(_collectionName)) {
         return reject('Please enter a valid name');
       }
       Store.get(StoreKeys.CollectionsList).then(list => {
@@ -34,7 +35,7 @@ class CollectionService {
           var collectionObj = {};
           collectionObj[id] = {
             id: id,
-            name: collectionName,
+            name: _collectionName,
             tweetIds: tweetIdArray || [],
             colorScheme: colorCombination,
           };
@@ -53,14 +54,14 @@ class CollectionService {
           var _list = JSON.parse(list);
           const newId = uuid.v4();
 
-          if (find(_list, {name: collectionName.trim()})) {
+          if (find(_list, {name: _collectionName})) {
             return reject('Archive name already exists.');
           }
 
           const newCollection = {};
           newCollection[newId] = {
             id: newId,
-            name: collectionName,
+            name: _collectionName,
             tweetIds: tweetIdArray || [],
             colorScheme: colorCombination,
           };
@@ -85,11 +86,12 @@ class CollectionService {
   async editCollection(collection) {
     return new Promise((resolve, reject) => {
       const {id, name} = collection;
-      if (find(this.collections, {name: name.trim()})) {
+      const collectionName = name.trim();
+      if (find(this.collections, {name: collectionName})) {
         return reject('Archive name already exists.');
       }
       const _collection = this.collections[id];
-      _collection.name = name;
+      _collection.name = collectionName;
       this.collections[id] = _collection;
       Store.set(StoreKeys.CollectionsList, this.collections)
         .then(() => {

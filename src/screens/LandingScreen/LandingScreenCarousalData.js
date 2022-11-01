@@ -1,11 +1,10 @@
-import {rightArrowIcon} from '../../assets/common';
-import {Anonymous, Discovery, Secure, CanaryGif} from '../../assets/animation';
+import {Anonymous, Discovery, Secure, CanaryLogo} from '../../assets/animation';
 import {layoutPtToPx} from '../../utils/responsiveUI';
 
 const LandingScreenCarousalData = [
   {
     id: 'welcome',
-    videoAsset: CanaryGif,
+    videoAsset: CanaryLogo,
     animationStyle: {
       height: layoutPtToPx(260),
       width: layoutPtToPx(260),
@@ -13,7 +12,6 @@ const LandingScreenCarousalData = [
     primaryText: 'Welcome to Canary',
     secondaryText:
       'A privacy-focused app that lets you browse content from Twitter without being tracked',
-    buttonText: 'Tell me more',
   },
   {
     id: 'discover',
@@ -25,7 +23,6 @@ const LandingScreenCarousalData = [
     primaryText: 'Discover Content',
     secondaryText:
       'Personalize your home feed, search for topics, archive tweets, and create lists',
-    buttonText: 'Sounds Pretty Cool',
   },
   {
     id: 'anonymous',
@@ -37,7 +34,6 @@ const LandingScreenCarousalData = [
     primaryText: 'Stay Anonymous',
     secondaryText:
       'All of this, without creating an account. We don’t ask for any permissions either!',
-    buttonText: 'That’s awesome',
   },
   {
     id: 'private',
@@ -49,8 +45,6 @@ const LandingScreenCarousalData = [
     primaryText: 'Stay Private & Secure',
     secondaryText:
       'All the data is stored only on your device, nowhere else — not even with us',
-    buttonText: 'Start my Incognito Mode',
-    buttonImage: rightArrowIcon,
   },
 ];
 
